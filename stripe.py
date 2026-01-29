@@ -42,7 +42,7 @@ class PaymentMethod(ABC):
 
     # Generate Timestamp
     def getTimeStamp(self):
-        return datetime.datetime.now().strftime("%x")
+        return datetime.datetime.now().strftime("%c")
 
     # Abstract Methods
     @abstractmethod
@@ -144,7 +144,29 @@ payment.printDetails()
 # Display Exit Message
 PaymentMethod.displayExitMessage()
 
+# Unit Testing
+class unittests(unittest.TestCase):
 
+    # Test 001 - Check that amount is greater than 0.00
+    def test001(self):
+        assert payment.getAmount() > 0.0
 
+    # Test 002 - Check Payment is CreditCard object
+    def test002(self):
+        if paymentMethod == "C":
+            self.assertIsInstance(payment, CreditCard)
+
+    # Test 003 - Check Payment is CreditCard object
+    def test003(self):
+        if paymentMethod == "P":
+            self.assertIsInstance(payment, Paypal)
+
+    # Test 004 - Check Paypal email not blank
+    def test004(self):
+        if paymentMethod == "P":
+            assert payment.getEmail() != ""
+
+        
+unittest.main()
         
         
